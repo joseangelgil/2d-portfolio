@@ -53,4 +53,4 @@ GitHub: [@joseangelgil](https://github.com/joseangelgil)
 
 ## 📷 Screenshot
 
-![Gameplay screenshot](img/screenshot.png)
+![Gameplay screenshot](assets/screenshot.png)
