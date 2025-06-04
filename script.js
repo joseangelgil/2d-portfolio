@@ -85,10 +85,10 @@ specialCollisionsMap.forEach((row, y) => {
 })
 
 const interactiveObjects = {
-  pc: `This is my PC. It is showing my <a href="https://joseangelgil.github.io/portfolio" target="_blank" rel="noopener noreferrer">portfolio</a> on screen.`,
-  documents: 'There are two documents here: my <a>CV</a> and some <a>info</a> about this portfolio.',
+  pc: `This is my PC, and it's showing my <a href="https://joseangelgil.github.io/portfolio" target="_blank" rel="noopener noreferrer">portfolio</a> on the screen.`,
+  documents: 'There are two documents here: my <a href="https://www.linkedin.com/in/joseangelgilgil" target="_blank" rel="noopener noreferrer">CV</a> and some <a href="https://github.com/joseangelgil/2d-portfolio" target="_blank" rel="noopener noreferrer">info</a> about this portfolio.',
   shelf: 'There are a lot of books here.',
-  degree: 'This is my Engineering degree.',
+  degree: 'This is my Engineering degree.'
 }
 
 const map = new Image()
