@@ -6,6 +6,8 @@ const textBoxContainer = document.getElementById('textbox')
 canvas.width = 832
 canvas.height = 768
 
+
+// Collisions map creation
 const collisionsMap = []
 for(let i = 0; i < collisions.length; i+=13) {
   collisionsMap.push(collisions.slice(i, i + 13))
@@ -16,6 +18,7 @@ for(let i = 0; i < specialCollisions.length; i+=13) {
   specialCollisionsMap.push(specialCollisions.slice(i, i + 13))
 }
 
+// Create boundaries out of collision points positions
 const boundaries = []
 
 collisionsMap.forEach((row, y) => {
@@ -84,6 +87,7 @@ specialCollisionsMap.forEach((row, y) => {
   })  
 })
 
+// Interactive objects dialogues
 const interactiveObjects = {
   pc: `This is my PC, and it's showing my <a href="https://joseangelgil.github.io/portfolio" target="_blank" rel="noopener noreferrer">portfolio</a> on the screen.`,
   documents: 'There are two documents here: my <a href="https://www.linkedin.com/in/joseangelgilgil" target="_blank" rel="noopener noreferrer">CV</a> and some <a href="https://github.com/joseangelgil/2d-portfolio" target="_blank" rel="noopener noreferrer">info</a> about this portfolio.',
@@ -91,6 +95,8 @@ const interactiveObjects = {
   degree: 'This is my Engineering degree.'
 }
 
+
+// Map and foreground images creation
 const map = new Image()
 map.src = './assets/map.png'
 
@@ -98,18 +104,31 @@ const foreground = new Image()
 foreground.src = './assets/foreground.png'
 
 
+// Player creation. 
+// Load all the images first and reference them in sprites instead of directly on sprites to avoid initial flickering when changing direction the first time.
+const playerUp = new Image()
+playerUp.src = './assets/playerUp.png'
+
+const playerDown = new Image()
+playerDown.src = './assets/playerDown.png'
+
+const playerLeft = new Image()
+playerLeft.src = './assets/playerLeft.png'
+
+const playerRight = new Image()
+playerRight.src = './assets/playerRight.png'
 
 const player = new Player({
   position: {
     x: canvas.width/2,
     y: 600
   },
-  imageSrc: './assets/playerDown.png',  
+  image: playerDown,  //Pass image preloaded instead of imageSrc
   sprites: {
-    up: './assets/playerUp.png',
-    down: './assets/playerDown.png',
-    right: './assets/playerRight.png',
-    left: './assets/playerLeft.png'
+    up: playerUp,
+    down: playerDown,
+    right: playerRight,
+    left: playerLeft
   },
   frames: {
     max: 4,
@@ -152,6 +171,7 @@ const collisionsDirections = {
   left: { x: -3, y: 0 }
 }
 
+
 function simulateCollision(direction, action) {
   const offset = collisionsDirections[direction]
   for (const boundary of boundaries) {
@@ -187,7 +207,7 @@ function animate(){
       if(boundary.name) {          
         const newDialogue = interactiveObjects[boundary.name];
         
-        //Only update the <p> element if the dialogue changes.
+        //Only update the <p> element if the dialogue change.
         if (newDialogue !== lastDialogue) {
           dialogueBox.innerHTML = newDialogue;
           lastDialogue = newDialogue;

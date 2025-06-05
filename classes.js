@@ -17,14 +17,14 @@ class Boundary {
 class Player {
   constructor({
     position,
-    imageSrc,
     sprites,
+    image,  //Get the image preloaded instead of imageSrc
     frames,
     animate = false
   }) {
     this.position = position
     this.image = new Image()
-    this.image.src = imageSrc
+    this.image.src = image.src
     this.sprites = sprites
     this.frames = {...frames, val: 0, elapsed: 0}
     this.image.onload = () => {
@@ -62,6 +62,9 @@ class Player {
   }
 
   changeSprite(direction) {
-    this.image.src = this.sprites[direction]
+    // this.image.src = this.sprites[direction]
+
+    // Change this.image preload instead of this.image.src to avoid flickering due to delay on loading.
+    this.image = this.sprites[direction]
   }
 }
